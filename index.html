@@ -440,7 +440,19 @@
     <div class="panel quizPanel" style="display:none"><p class="lead quizMsg"></p></div>
   </section>
 
-  <!-- 16. 마무리 -->
+  <!-- 16. 퀴즈 4 (심화) -->
+  <section class="slide bg-grass">
+    <span class="pill adv">퀴즈 4 · 심화 🎯</span>
+    <h2 class="mid onlight">중력의 세기는<br>무엇으로 정해질까요?</h2>
+    <div class="row" style="flex-direction:column;gap:14px">
+      <button class="quiz-btn" onclick="answer(this,false)">색깔과 모양</button>
+      <button class="quiz-btn" onclick="answer(this,true,'정답! 🎉 질량이 클수록, 거리가 가까울수록 중력이 세져요!')">질량과 거리</button>
+      <button class="quiz-btn" onclick="answer(this,false)">소리와 냄새</button>
+    </div>
+    <div class="panel quizPanel" style="display:none"><p class="lead quizMsg"></p></div>
+  </section>
+
+  <!-- 17. 마무리 -->
   <section class="slide bg-night">
     <div class="stars" id="sf3" aria-hidden="true"></div>
     <div class="earth" aria-hidden="true">🌎</div>
@@ -461,7 +473,7 @@
   <div class="dots" id="dots" role="tablist" aria-label="슬라이드 이동"></div>
   <button id="nextBtn" onclick="go(1)" aria-label="다음 슬라이드">▶</button>
 </div>
-<div class="counter" id="counter" aria-live="polite">1 / 16</div>
+<div class="counter" id="counter" aria-live="polite">1 / 17</div>
 
 <script>
   const slides=[...document.querySelectorAll('.slide')];
