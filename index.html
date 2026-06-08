@@ -163,17 +163,14 @@
   .chip.tag{cursor:default}
   #timerBtn[data-run="1"]{background:var(--orange);color:#fff;box-shadow:0 4px 0 var(--orange-d)}
 
-  /* ====== 네비 ====== */
-  .nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:50}
-  .nav button{font-family:'Jua',sans-serif;border:none;cursor:pointer;background:#fff;color:var(--ink);
-    font-size:1.3rem;width:56px;height:56px;border-radius:50%;box-shadow:0 6px 0 rgba(0,0,0,.2);transition:transform .1s}
-  .nav button:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
-  .nav button:disabled{opacity:.4;cursor:default}
-  .dots{display:flex;gap:7px;background:rgba(255,255,255,.78);padding:8px 12px;border-radius:999px;align-items:center}
-  .dot{width:11px;height:11px;border-radius:50%;background:#9fb6d4;cursor:pointer;border:none;padding:0;transition:.2s}
-  .dot.on{background:var(--orange);transform:scale(1.4)}
-  .counter{position:fixed;bottom:24px;right:18px;z-index:50;background:rgba(255,255,255,.78);color:var(--ink);
-    padding:.3em .8em;border-radius:999px;font-size:.95rem;box-shadow:0 4px 0 rgba(0,0,0,.14)}
+  /* ====== 네비 (미니멀) ====== */
+  .nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:6px;align-items:center;z-index:50;
+    background:rgba(255,255,255,.7);padding:4px 8px;border-radius:999px;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+  .nav button{font-family:'Jua',sans-serif;border:none;cursor:pointer;background:transparent;color:var(--ink);
+    font-size:1.2rem;width:30px;height:30px;border-radius:50%;line-height:1;transition:transform .1s}
+  .nav button:active{transform:scale(.88)}
+  .nav button:disabled{opacity:.3;cursor:default}
+  .counter{color:var(--ink);font-size:.9rem;min-width:46px;text-align:center;opacity:.85}
 
   /* ====== 인쇄(유인물) ====== */
   @media print{
@@ -469,27 +466,15 @@
 </div>
 
 <div class="nav">
-  <button id="prevBtn" onclick="go(-1)" aria-label="이전 슬라이드">◀</button>
-  <div class="dots" id="dots" role="tablist" aria-label="슬라이드 이동"></div>
-  <button id="nextBtn" onclick="go(1)" aria-label="다음 슬라이드">▶</button>
+  <button id="prevBtn" onclick="go(-1)" aria-label="이전 슬라이드">‹</button>
+  <span class="counter" id="counter" aria-live="polite">1 / 17</span>
+  <button id="nextBtn" onclick="go(1)" aria-label="다음 슬라이드">›</button>
 </div>
-<div class="counter" id="counter" aria-live="polite">1 / 17</div>
 
 <script>
   const slides=[...document.querySelectorAll('.slide')];
   const total=slides.length;
   let idx=0;
-
-  // 점(dot) 생성
-  const dots=document.getElementById('dots');
-  slides.forEach((_,i)=>{
-    const b=document.createElement('button');
-    b.className='dot'+(i===0?' on':'');
-    b.setAttribute('role','tab');
-    b.setAttribute('aria-label',(i+1)+'번 슬라이드');
-    b.onclick=()=>show(i);
-    dots.appendChild(b);
-  });
 
   const counter=document.getElementById('counter');
   const prevBtn=document.getElementById('prevBtn');
@@ -498,7 +483,6 @@
   function show(n){
     idx=Math.max(0,Math.min(total-1,n));
     slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
-    [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===idx));
     counter.textContent=(idx+1)+' / '+total;
     prevBtn.disabled=idx===0;
     nextBtn.disabled=idx===total-1;
